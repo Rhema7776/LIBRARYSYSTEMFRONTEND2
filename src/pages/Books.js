@@ -29,7 +29,7 @@ export default function Books() {
   if (error) return <div style={{ padding: "20px", color: "red" }}>{error}</div>;
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px"}} >
       <h2>Available Books 📚</h2>
       {books.length === 0 ? (
         <p>No books available.</p>

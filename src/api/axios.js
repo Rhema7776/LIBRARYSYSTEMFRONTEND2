@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   baseURL: "https://rhema1.pythonanywhere.com/api",
-  // baseURL: "http://127.0.0.1:8000/api,"
+  // baseURL: "http://127.0.0.1:8000/api",
 });
 
 // Request interceptor → attach access token

@@ -33,7 +33,7 @@ export default function BorrowBook() {
   const handleBorrow = async (bookId) => {
     try {
       const res = await api.post(`/borrow/`, { book_id: bookId });
-      setMessage("Book borrowed successfully!");
+      setMessage("Book borrowed successfully Come pick it up!");
 
       // Update available books
       setBooks(prev =>

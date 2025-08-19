@@ -11,7 +11,9 @@ import BorrowBook from "./pages/BorrowBook";
 import ReturnBook from "./pages/ReturnBook";
 import History from "./pages/History";
 import Manage from "./pages/ManageBorrowers";
-
+import Footer from "./components/Footer";
+import StaffRoute from "./pages/StaffRoute";
+import StaffDashboard from "./pages/StaffDashboard";
 function App() {
   return (
     <AuthProvider>
@@ -64,10 +66,21 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/staff-dashboard"
+            element={
+              <ProtectedRoute>
+                <StaffRoute>
+                  <StaffDashboard />
+                </StaffRoute>
+              </ProtectedRoute>
+            }
+          />
 
           {/* Fallback */}
           <Route path="*" element={<div style={{ padding: "50px", textAlign: "center" }}>Page not found</div>} />
         </Routes>
+        <Footer />
       </Router>
     </AuthProvider>
   );

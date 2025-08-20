@@ -9,7 +9,7 @@ export default function Navbar() {
     <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px 20px", background: "#2c3e50", color: "#fff" }}>
       <div>
         <Link to="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "bold", marginRight: "15px" }}>
-          Rhema's Library
+          <strong>G-16</strong> Library
         </Link>
       </div>
       <div>

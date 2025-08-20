@@ -74,8 +74,8 @@ export default function History() {
                 boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
               }}
             >
-              <h3>{t.book.title}</h3>
-              <p>{t.book.author}</p>
+              <h3>{t.book_title}</h3>
+              <p>Borrower: {t.borrower_username} ({t.borrower_email})</p>
               <p>Borrowed: {t.borrow_date}</p>
               <p>Returned: {t.return_date || "Not yet"}</p>
               <p>Fine: ${t.fine}</p>

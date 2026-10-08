@@ -1,8 +1,8 @@
 import axios from "axios";
+import { API_URL } from "../config";
 
 const api = axios.create({
-  baseURL: "https://rhema1.pythonanywhere.com/api",
-  // baseURL: "http://127.0.0.1:8000/api",
+  baseURL: API_URL,
 });
 
 // Request interceptor → attach access token
@@ -38,7 +38,7 @@ api.interceptors.response.use(
       }
 
       try {
-        const res = await axios.post("http://127.0.0.1:8000/api/token/refresh/", {
+        const res = await axios.post(`${API_URL}/token/refresh/`, {
           refresh: refreshToken,
         });
 

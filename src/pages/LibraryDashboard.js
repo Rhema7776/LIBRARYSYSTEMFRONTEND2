@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { formatMoney } from "../config";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -120,10 +121,10 @@ export default function LibraryDashboard() {
                   <h3>{book.title}</h3>
                   <p>{book.author}</p>
                   <p>Due: {item.due_date}</p>
-                  <p>Fine: {item.fine || 0}</p>
+                  <p>Fine: {formatMoney(item.fine)}</p>
                   {item.fine > 0 && (
                     <p style={{ color: "yellow", fontWeight: "bold" }}>
-                      Pay NGN {item.fine} to account: xxxxx-xxx--xx. Show receipt on return.
+                      Pay {formatMoney(item.fine)} to account: xxxxx-xxx--xx. Show receipt on return.
                     </p>
                   )}
                 </div>
@@ -186,7 +187,7 @@ export default function LibraryDashboard() {
                   <p>{book.author}</p>
                   <p>Borrowed: {item.borrow_date}</p>
                   <p>Returned: {item.return_date || "Not yet"}</p>
-                  <p>Fine: {item.fine || 0}</p>
+                  <p>Fine: {formatMoney(item.fine)}</p>
                 </div>
               </div>
             );
@@ -214,7 +215,7 @@ export default function LibraryDashboard() {
             }}>
               <h3 style={{ marginBottom: "15px" }}>Fine Payment Notice</h3>
               <p style={{ marginBottom: "20px" }}>
-                Fine: NGN {selectedTransaction.fine}. Pay to bank account xxxxx-xxx--xx and present receipt.
+                Fine: {formatMoney(selectedTransaction.fine)}. Pay to bank account xxxxx-xxx--xx and present receipt.
                 Otherwise, it will be deducted from your fees.
               </p>
               <button

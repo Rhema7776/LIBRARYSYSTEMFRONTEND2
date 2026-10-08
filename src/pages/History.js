@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { formatMoney } from "../config";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -81,7 +82,7 @@ export default function History() {
               </p>
               <p>Borrowed: {t.borrow_date}</p>
               <p>Returned: {t.return_date || "Not yet"}</p>
-              <p>Fine: ${t.fine}</p>
+              <p>Fine: {formatMoney(t.fine)}</p>
             </div>
           ))}
         </div>

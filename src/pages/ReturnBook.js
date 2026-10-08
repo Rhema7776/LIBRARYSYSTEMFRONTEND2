@@ -135,6 +135,7 @@
 // }
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { formatMoney } from "../config";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -161,7 +162,7 @@ export default function ReturnBook() {
   const handleReturn = async (transactionId) => {
     try {
       const res = await api.post(`/return/`, { transaction_id: transactionId });
-      setMessage(res.data.message + (res.data.fine ? ` | Fine: ${res.data.fine}` : ""));
+      setMessage(res.data.message + (res.data.fine ? ` | Fine: ${formatMoney(res.data.fine)}` : ""));
       // Refresh transactions after return
       setTransactions(prev => prev.filter(t => t.id !== transactionId));
     } catch (err) {
@@ -237,7 +238,7 @@ export default function ReturnBook() {
                 <h3>{item.book_title}</h3>
                 <p>{item.book_author}</p>
                 <p>Due: {item.due_date}</p>
-                {item.fine > 0 && <p style={{ color: "#ff6666" }}>Fine: {item.fine}</p>}
+                {item.fine > 0 && <p style={{ color: "#ff6666" }}>Fine: {formatMoney(item.fine)}</p>}
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                 <button onClick={() => handleReturn(item.id)} style={{

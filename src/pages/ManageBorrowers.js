@@ -23,19 +23,26 @@ export default function ManageBorrowers() {
   // Safe helper functions
 
 
-  const getBookTitle = (transaction) => {
-    if (!transaction.book) return "Unknown Book";
-    if (typeof transaction.book === "string") return transaction.book;
-    return transaction.book?.title || "Unknown Book";
-  };
+  // The server sends the title as `book_title`
+  const getBookTitle = (transaction) => transaction.book_title || "Unknown Book";
 
-  const markAsReturned = (id) => {
-    setTransactions((prev) =>
-      prev.map((t) =>
-        t.id === id ? { ...t, return_date: new Date().toISOString() } : t
-      )
-    );
-    setMessage("✅ Book marked as returned!");
+  // Tell the server first, and only update the screen if the server agrees.
+  // (Before, the button only changed the page in the browser, so a refresh
+  // brought the book back and the copy was never returned to stock.)
+  const markAsReturned = async (id) => {
+    try {
+      const res = await api.post("/staff/return/", { transaction_id: id });
+      setTransactions((prev) =>
+        prev.map((t) =>
+          t.id === id
+            ? { ...t, return_date: res.data.return_date, fine: res.data.fine }
+            : t
+        )
+      );
+      setMessage("✅ Book marked as returned!");
+    } catch (err) {
+      setMessage(err.response?.data?.error || "❌ Could not mark as returned.");
+    }
     setTimeout(() => setMessage(""), 3000);
   };
 
@@ -44,7 +51,11 @@ export default function ManageBorrowers() {
       <h1 style={{ textAlign: "center", marginBottom: "20px", color: "#2c3e50" }}>
         📚 Manage Borrowers
       </h1>
-      {message && <p style={{ textAlign: "center", color: "green" }}>{message}</p>}
+      {message && (
+        <p style={{ textAlign: "center", color: message.startsWith("✅") ? "green" : "crimson" }}>
+          {message}
+        </p>
+      )}
 
       <div
         style={{

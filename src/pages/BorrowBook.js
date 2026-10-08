@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 export default function BorrowBook() {
   const [books, setBooks] = useState([]);
   const [message, setMessage] = useState("");
-  const [borrowed, setBorrowed] = useState([]); // store borrowed transactions
+  const [ , setBorrowed] = useState([]); // store borrowed transactions
 
   const gradients = [
     "linear-gradient(to bottom, #001f3f, #004080)",

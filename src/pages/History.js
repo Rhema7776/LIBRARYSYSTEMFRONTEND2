@@ -67,15 +67,18 @@ export default function History() {
               style={{
                 background: "#fff",
                 color: "#000",
-                padding: "15px",
+                padding: "10px",
                 borderRadius: "8px",
-                width: "220px",
+                width: "260px",
                 textAlign: "center",
                 boxShadow: "0px 0px 10px rgba(0,0,0,0.3)",
               }}
             >
               <h3>{t.book_title}</h3>
-              <p>Borrower: {t.borrower_username} ({t.borrower_email})</p>
+              <p >Borrower: <span style={{ fontWeight: "bold" }}>{t.borrower_username}</span></p>
+              <p style={{ fontWeight: "bold", fontSize: "0.9em", overflowWrap: "anywhere" }}>
+                ({t.borrower_email})
+              </p>
               <p>Borrowed: {t.borrow_date}</p>
               <p>Returned: {t.return_date || "Not yet"}</p>
               <p>Fine: ${t.fine}</p>

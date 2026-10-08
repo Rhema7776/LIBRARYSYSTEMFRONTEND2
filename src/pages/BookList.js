@@ -14,13 +14,7 @@ export default function BookList() {
     "linear-gradient(to bottom, #8360c3, #2ebf91)",
   ];
 
-  const images = [
-    "https://i.etsystatic.com/51832690/r/il/acb8ee/6767648590/il_600x600.6767648590_nuu6.jpg",
-    "https://i.pinimg.com/1200x/ea/bf/19/eabf19a502fe6865e84ae9b5362fd818.jpg",
-    "https://thumbs.dreamstime.com/b/diverse-group-people-working-together-concept-85116773.jpg?w=768",
-    "https://www.dreamstime.com/stock-photos-teacher-children-looking-bird-s-nest-image6081763",
-    "linear-gradient(to bottom, #8360c3, #2ebf91)",
-  ];
+
 
   useEffect(() => {
     api.get("/books/")

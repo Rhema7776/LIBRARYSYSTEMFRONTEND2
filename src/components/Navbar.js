@@ -23,11 +23,11 @@ export default function Navbar() {
           <>
             <Link to="/books" style={{ color: "#fff", marginRight: "15px" }}>Books</Link>
             <Link to="/borrow" style={{ color: "#fff", marginRight: "15px" }}>Borrow</Link>
-            <Link to="/return" style={{ color: "#fff", marginRight: "15px" }}>Return</Link>
             <Link to="/history" style={{ color: "#fff", marginRight: "15px" }}>History</Link>
 
+            {/* Staff only: confirm returns, clear fines */}
             {isStaff && (
-              <Link to="/manage" style={{ color: "#fff", marginRight: "15px" }}>Manage Borrowers</Link>
+              <Link to="/manage" style={{ color: "#fff", marginRight: "15px" }}>Returns &amp; Borrowers</Link>
             )}
 
             <button onClick={logout} style={{ background: "#e74c3c", border: "none", color: "#fff", padding: "5px 10px", borderRadius: "4px", cursor: "pointer" }}>

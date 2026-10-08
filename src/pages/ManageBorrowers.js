@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { formatMoney } from "../config";
 
 export default function ManageBorrowers() {
   const [transactions, setTransactions] = useState([]);
@@ -46,10 +47,22 @@ export default function ManageBorrowers() {
     setTimeout(() => setMessage(""), 3000);
   };
 
+  // Staff confirm that the fine money was received, then the fine is cleared.
+  const clearFine = async (id) => {
+    try {
+      await api.post("/staff/clear-fine/", { transaction_id: id });
+      setTransactions((prev) => prev.map((t) => (t.id === id ? { ...t, fine: 0 } : t)));
+      setMessage("✅ Fine cleared.");
+    } catch (err) {
+      setMessage(err.response?.data?.error || "❌ Could not clear the fine.");
+    }
+    setTimeout(() => setMessage(""), 3000);
+  };
+
   return (
     <div style={{ padding: "20px", maxWidth: "1200px", margin: "auto" }}>
       <h1 style={{ textAlign: "center", marginBottom: "20px", color: "#2c3e50" }}>
-        📚 Manage Borrowers
+        📚 Returns &amp; Borrowers
       </h1>
       {message && (
         <p style={{ textAlign: "center", color: message.startsWith("✅") ? "green" : "crimson" }}>
@@ -101,6 +114,28 @@ export default function ManageBorrowers() {
               Returned:{" "}
               {t.return_date ? new Date(t.return_date).toLocaleDateString() : "❌ Not yet"}
             </p>
+            {t.fine > 0 && (
+              <p style={{ color: "crimson" }}>
+                <strong>Fine:</strong> {formatMoney(t.fine)}
+              </p>
+            )}
+            {t.fine > 0 && t.return_date && (
+              <button
+                onClick={() => clearFine(t.id)}
+                style={{
+                  marginTop: "10px",
+                  width: "100%",
+                  padding: "8px",
+                  background: "#e67e22",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                }}
+              >
+                Fine received: clear it
+              </button>
+            )}
             {!t.return_date && (
               <button
                 onClick={() => markAsReturned(t.id)}

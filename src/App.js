@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -8,7 +8,6 @@ import Signup from "./pages/SignUp";
 import Login from "./pages/Login";
 import BookList from "./pages/BookList";
 import BorrowBook from "./pages/BorrowBook";
-import ReturnBook from "./pages/ReturnBook";
 import History from "./pages/History";
 import Manage from "./pages/ManageBorrowers";
 import Footer from "./components/Footer";
@@ -42,14 +41,9 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/return"
-            element={
-              <ProtectedRoute>
-                <ReturnBook />
-              </ProtectedRoute>
-            }
-          />
+          {/* Returns are handled by staff on the Manage page. Old /return links go there,
+              and non-staff are bounced to /books by StaffRoute. */}
+          <Route path="/return" element={<Navigate to="/manage" replace />} />
           <Route
             path="/history"
             element={
@@ -62,7 +56,9 @@ function App() {
             path="/manage"
             element={
               <ProtectedRoute>
-                <Manage />
+                <StaffRoute>
+                  <Manage />
+                </StaffRoute>
               </ProtectedRoute>
             }
           />

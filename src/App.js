@@ -11,6 +11,7 @@ import BorrowBook from "./pages/BorrowBook";
 import History from "./pages/History";
 import Manage from "./pages/ManageBorrowers";
 import Footer from "./components/Footer";
+import ChatBox from "./components/ChatBox";
 import StaffRoute from "./pages/StaffRoute";
 import StaffDashboard from "./pages/StaffDashboard";
 function App() {
@@ -77,6 +78,7 @@ function App() {
           <Route path="*" element={<div style={{ padding: "50px", textAlign: "center" }}>Page not found</div>} />
         </Routes>
         <Footer />
+        <ChatBox /> {/* only shows for logged-in members */}
       </Router>
     </AuthProvider>
   );

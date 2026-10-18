@@ -6,7 +6,8 @@ export default function Navbar() {
   const { isLoggedIn, logout, isStaff } = useContext(AuthContext);
 
   return (
-    <nav style={{ display: "flex", justifyContent: "space-between", padding: "10px 20px", background: "#2c3e50", color: "#fff" }}>
+    <nav style={{ display: "flex", flexWrap: "wrap", gap: "8px", alignItems: "center", justifyContent: "space-between", padding: "10px 20px", background: "#2c3e50", color: "#fff" }}>
+      
       <div>
         <Link to="/" style={{ color: "#fff", textDecoration: "none", fontWeight: "bold", marginRight: "15px" }}>
           <strong>G-16</strong> Library

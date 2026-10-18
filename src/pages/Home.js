@@ -63,7 +63,7 @@ export default function Home() {
           color: "#fff",
         }}
       >
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
+        <h1 style={{ fontSize: "clamp(1.6rem, 6vw, 2.5rem)", marginBottom: "20px" }}>
           📚 Welcome to the Library System
         </h1>
         <p style={{ fontSize: "1.2rem", marginBottom: "30px" }}>

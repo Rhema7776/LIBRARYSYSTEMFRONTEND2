@@ -112,7 +112,7 @@ export default function ChatBox() {
       <div style={styles.log}>
         {messages.map((m, i) => (
           <div key={i}>
-            <div style={bubble(m.role)}>{m.text}</div>
+            <div style={bubble(m.role)}>{m.role === "assistant" ? m.text.replace(/\*+/g, "") : m.text}</div>
             {m.escalated && <div style={styles.notice}>A librarian has been notified.</div>}
           </div>
         ))}
